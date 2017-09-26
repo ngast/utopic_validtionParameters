@@ -1,0 +1,108 @@
+continuous reachability
+{
+	state var t, s0, s1 , s2, s3, s4, s5, s6, s7, s8, s9, s10, s11 , s12, s13, s14, s15, s16, s17, s18, s19, s20, s21 , s22, s23, s24, s25, s26, s27, s28, s29, s30, s31 , s32
+
+	par
+	{
+  		kUnbind2 = 0.1
+  		kBind3 = 10.0000
+  		kUnbind3 = 0.1
+  		kBind4 = 10.0004
+  		kUnbind4 = 0.1
+  		kBind5 = 10.0008
+  		kUnbind5 = 0.1
+	}
+
+	setting
+	{
+		fixed steps 0.01                    # time step -size
+		time 0.2                           # time  horizon
+		remainder estimation 3e-1           # remainder  estimation
+		QR precondition                     # preconditioning  method
+		gnuplot octagon t, s1             # 2D projection  for  plotting
+		adaptive orders { min 2 , max 6 }
+		cutoff 1e-20                        # cutoff  threshold  is [-1e-20,1e-20]
+		precision 53
+		output replicatedBindingSite5Asymm  # name of the  output  files
+		print on                            # print  out the  computation  steps
+	}
+
+	nonpoly ode                           # integration  scheme
+	{
+		t' = 1
+		s0' = -[9.99,10]*s0*s1 + -[9.89,9.9]*s0*s1 + -kBind3*s0*s1 + -kBind4*s0*s1 + -kBind5*s0*s1 + [0.08,0.1]*s2 + kUnbind2*s3 + kUnbind3*s4 + kUnbind4*s5 + kUnbind5*s6
+  s1' = -[9.99,10]*s0*s1 + -[9.89,9.9]*s0*s1 + -kBind3*s0*s1 + -kBind4*s0*s1 + -kBind5*s0*s1 + -[9.99,10]*s1*s3 + -[9.99,10]*s1*s4 + -[9.99,10]*s1*s5 + -[9.99,10]*s1*s6 + [0.08,0.1]*s2 + -[9.89,9.9]*s1*s2 + -[9.89,9.9]*s1*s4 + -[9.89,9.9]*s1*s5 + -[9.89,9.9]*s1*s6 + kUnbind2*s3 + -kBind3*s1*s2 + -kBind3*s1*s3 + -kBind3*s1*s5 + -kBind3*s1*s6 + kUnbind3*s4 + -kBind4*s1*s2 + -kBind4*s1*s3 + -kBind4*s1*s4 + -kBind4*s1*s6 + kUnbind4*s5 + -kBind5*s1*s2 + -kBind5*s1*s3 + -kBind5*s1*s4 + -kBind5*s1*s5 + kUnbind5*s6 + -[9.99,10]*s1*s11 + -[9.99,10]*s1*s12 + -[9.99,10]*s1*s13 + -[9.99,10]*s1*s14 + -[9.99,10]*s1*s15 + -[9.99,10]*s1*s16 + [0.08,0.1]*s7 + [0.08,0.1]*s8 + [0.08,0.1]*s9 + [0.08,0.1]*s10 + -[9.89,9.9]*s1*s8 + -[9.89,9.9]*s1*s9 + -[9.89,9.9]*s1*s10 + -[9.89,9.9]*s1*s14 + -[9.89,9.9]*s1*s15 + -[9.89,9.9]*s1*s16 + kUnbind2*s7 + kUnbind2*s11 + kUnbind2*s12 + kUnbind2*s13 + -kBind3*s1*s7 + -kBind3*s1*s9 + -kBind3*s1*s10 + -kBind3*s1*s12 + -kBind3*s1*s13 + -kBind3*s1*s16 + kUnbind3*s8 + kUnbind3*s11 + kUnbind3*s14 + kUnbind3*s15 + -kBind4*s1*s7 + -kBind4*s1*s8 + -kBind4*s1*s10 + -kBind4*s1*s11 + -kBind4*s1*s13 + -kBind4*s1*s15 + kUnbind4*s9 + kUnbind4*s12 + kUnbind4*s14 + kUnbind4*s16 + -kBind5*s1*s7 + -kBind5*s1*s8 + -kBind5*s1*s9 + -kBind5*s1*s11 + -kBind5*s1*s12 + -kBind5*s1*s14 + kUnbind5*s10 + kUnbind5*s13 + kUnbind5*s15 + kUnbind5*s16 + -[9.99,10]*s1*s23 + -[9.99,10]*s1*s24 + -[9.99,10]*s1*s25 + -[9.99,10]*s1*s26 + [0.08,0.1]*s17 + [0.08,0.1]*s18 + [0.08,0.1]*s19 + [0.08,0.1]*s20 + [0.08,0.1]*s21 + [0.08,0.1]*s22 + -[9.89,9.9]*s1*s20 + -[9.89,9.9]*s1*s21 + -[9.89,9.9]*s1*s22 + -[9.89,9.9]*s1*s26 + kUnbind2*s17 + kUnbind2*s18 + kUnbind2*s19 + kUnbind2*s23 + kUnbind2*s24 + kUnbind2*s25 + -kBind3*s1*s18 + -kBind3*s1*s19 + -kBind3*s1*s22 + -kBind3*s1*s25 + kUnbind3*s17 + kUnbind3*s20 + kUnbind3*s21 + kUnbind3*s23 + kUnbind3*s24 + kUnbind3*s26 + -kBind4*s1*s17 + -kBind4*s1*s19 + -kBind4*s1*s21 + -kBind4*s1*s24 + kUnbind4*s18 + kUnbind4*s20 + kUnbind4*s22 + kUnbind4*s23 + kUnbind4*s25 + kUnbind4*s26 + -kBind5*s1*s17 + -kBind5*s1*s18 + -kBind5*s1*s20 + -kBind5*s1*s23 + kUnbind5*s19 + kUnbind5*s21 + kUnbind5*s22 + kUnbind5*s24 + kUnbind5*s25 + kUnbind5*s26 + -[9.99,10]*s1*s31 + [0.08,0.1]*s27 + [0.08,0.1]*s28 + [0.08,0.1]*s29 + [0.08,0.1]*s30 + -[9.89,9.9]*s1*s30 + kUnbind2*s27 + kUnbind2*s28 + kUnbind2*s29 + kUnbind2*s31 + -kBind3*s1*s29 + kUnbind3*s27 + kUnbind3*s28 + kUnbind3*s30 + kUnbind3*s31 + -kBind4*s1*s28 + kUnbind4*s27 + kUnbind4*s29 + kUnbind4*s30 + kUnbind4*s31 + -kBind5*s1*s27 + kUnbind5*s28 + kUnbind5*s29 + kUnbind5*s30 + kUnbind5*s31 + [0.08,0.1]*s32 + kUnbind2*s32 + kUnbind3*s32 + kUnbind4*s32 + kUnbind5*s32
+  s2' = [9.99,10]*s0*s1 + -[0.08,0.1]*s2 + -[9.89,9.9]*s1*s2 + -kBind3*s1*s2 + -kBind4*s1*s2 + -kBind5*s1*s2 + kUnbind2*s7 + kUnbind3*s8 + kUnbind4*s9 + kUnbind5*s10
+  s3' = [9.89,9.9]*s0*s1 + -[9.99,10]*s1*s3 + -kUnbind2*s3 + -kBind3*s1*s3 + -kBind4*s1*s3 + -kBind5*s1*s3 + [0.08,0.1]*s7 + kUnbind3*s11 + kUnbind4*s12 + kUnbind5*s13
+  s4' = kBind3*s0*s1 + -[9.99,10]*s1*s4 + -[9.89,9.9]*s1*s4 + -kUnbind3*s4 + -kBind4*s1*s4 + -kBind5*s1*s4 + [0.08,0.1]*s8 + kUnbind2*s11 + kUnbind4*s14 + kUnbind5*s15
+  s5' = kBind4*s0*s1 + -[9.99,10]*s1*s5 + -[9.89,9.9]*s1*s5 + -kBind3*s1*s5 + -kUnbind4*s5 + -kBind5*s1*s5 + [0.08,0.1]*s9 + kUnbind2*s12 + kUnbind3*s14 + kUnbind5*s16
+  s6' = kBind5*s0*s1 + -[9.99,10]*s1*s6 + -[9.89,9.9]*s1*s6 + -kBind3*s1*s6 + -kBind4*s1*s6 + -kUnbind5*s6 + [0.08,0.1]*s10 + kUnbind2*s13 + kUnbind3*s15 + kUnbind4*s16
+  s7' = [9.99,10]*s1*s3 + [9.89,9.9]*s1*s2 + -[0.08,0.1]*s7 + -kUnbind2*s7 + -kBind3*s1*s7 + -kBind4*s1*s7 + -kBind5*s1*s7 + kUnbind3*s17 + kUnbind4*s18 + kUnbind5*s19
+  s8' = [9.99,10]*s1*s4 + kBind3*s1*s2 + -[0.08,0.1]*s8 + -[9.89,9.9]*s1*s8 + -kUnbind3*s8 + -kBind4*s1*s8 + -kBind5*s1*s8 + kUnbind2*s17 + kUnbind4*s20 + kUnbind5*s21
+  s9' = [9.99,10]*s1*s5 + kBind4*s1*s2 + -[0.08,0.1]*s9 + -[9.89,9.9]*s1*s9 + -kBind3*s1*s9 + -kUnbind4*s9 + -kBind5*s1*s9 + kUnbind2*s18 + kUnbind3*s20 + kUnbind5*s22
+  s10' = [9.99,10]*s1*s6 + kBind5*s1*s2 + -[0.08,0.1]*s10 + -[9.89,9.9]*s1*s10 + -kBind3*s1*s10 + -kBind4*s1*s10 + -kUnbind5*s10 + kUnbind2*s19 + kUnbind3*s21 + kUnbind4*s22
+  s11' = [9.89,9.9]*s1*s4 + kBind3*s1*s3 + -[9.99,10]*s1*s11 + -kUnbind2*s11 + -kUnbind3*s11 + -kBind4*s1*s11 + -kBind5*s1*s11 + [0.08,0.1]*s17 + kUnbind4*s23 + kUnbind5*s24
+  s12' = [9.89,9.9]*s1*s5 + kBind4*s1*s3 + -[9.99,10]*s1*s12 + -kUnbind2*s12 + -kBind3*s1*s12 + -kUnbind4*s12 + -kBind5*s1*s12 + [0.08,0.1]*s18 + kUnbind3*s23 + kUnbind5*s25
+  s13' = [9.89,9.9]*s1*s6 + kBind5*s1*s3 + -[9.99,10]*s1*s13 + -kUnbind2*s13 + -kBind3*s1*s13 + -kBind4*s1*s13 + -kUnbind5*s13 + [0.08,0.1]*s19 + kUnbind3*s24 + kUnbind4*s25
+  s14' = kBind3*s1*s5 + kBind4*s1*s4 + -[9.99,10]*s1*s14 + -[9.89,9.9]*s1*s14 + -kUnbind3*s14 + -kUnbind4*s14 + -kBind5*s1*s14 + [0.08,0.1]*s20 + kUnbind2*s23 + kUnbind5*s26
+  s15' = kBind3*s1*s6 + kBind5*s1*s4 + -[9.99,10]*s1*s15 + -[9.89,9.9]*s1*s15 + -kUnbind3*s15 + -kBind4*s1*s15 + -kUnbind5*s15 + [0.08,0.1]*s21 + kUnbind2*s24 + kUnbind4*s26
+  s16' = kBind4*s1*s6 + kBind5*s1*s5 + -[9.99,10]*s1*s16 + -[9.89,9.9]*s1*s16 + -kBind3*s1*s16 + -kUnbind4*s16 + -kUnbind5*s16 + [0.08,0.1]*s22 + kUnbind2*s25 + kUnbind3*s26
+  s17' = [9.99,10]*s1*s11 + [9.89,9.9]*s1*s8 + kBind3*s1*s7 + -[0.08,0.1]*s17 + -kUnbind2*s17 + -kUnbind3*s17 + -kBind4*s1*s17 + -kBind5*s1*s17 + kUnbind4*s27 + kUnbind5*s28
+  s18' = [9.99,10]*s1*s12 + [9.89,9.9]*s1*s9 + kBind4*s1*s7 + -[0.08,0.1]*s18 + -kUnbind2*s18 + -kBind3*s1*s18 + -kUnbind4*s18 + -kBind5*s1*s18 + kUnbind3*s27 + kUnbind5*s29
+  s19' = [9.99,10]*s1*s13 + [9.89,9.9]*s1*s10 + kBind5*s1*s7 + -[0.08,0.1]*s19 + -kUnbind2*s19 + -kBind3*s1*s19 + -kBind4*s1*s19 + -kUnbind5*s19 + kUnbind3*s28 + kUnbind4*s29
+  s20' = [9.99,10]*s1*s14 + kBind3*s1*s9 + kBind4*s1*s8 + -[0.08,0.1]*s20 + -[9.89,9.9]*s1*s20 + -kUnbind3*s20 + -kUnbind4*s20 + -kBind5*s1*s20 + kUnbind2*s27 + kUnbind5*s30
+  s21' = [9.99,10]*s1*s15 + kBind3*s1*s10 + kBind5*s1*s8 + -[0.08,0.1]*s21 + -[9.89,9.9]*s1*s21 + -kUnbind3*s21 + -kBind4*s1*s21 + -kUnbind5*s21 + kUnbind2*s28 + kUnbind4*s30
+  s22' = [9.99,10]*s1*s16 + kBind4*s1*s10 + kBind5*s1*s9 + -[0.08,0.1]*s22 + -[9.89,9.9]*s1*s22 + -kBind3*s1*s22 + -kUnbind4*s22 + -kUnbind5*s22 + kUnbind2*s29 + kUnbind3*s30
+  s23' = [9.89,9.9]*s1*s14 + kBind3*s1*s12 + kBind4*s1*s11 + -[9.99,10]*s1*s23 + -kUnbind2*s23 + -kUnbind3*s23 + -kUnbind4*s23 + -kBind5*s1*s23 + [0.08,0.1]*s27 + kUnbind5*s31
+  s24' = [9.89,9.9]*s1*s15 + kBind3*s1*s13 + kBind5*s1*s11 + -[9.99,10]*s1*s24 + -kUnbind2*s24 + -kUnbind3*s24 + -kBind4*s1*s24 + -kUnbind5*s24 + [0.08,0.1]*s28 + kUnbind4*s31
+  s25' = [9.89,9.9]*s1*s16 + kBind4*s1*s13 + kBind5*s1*s12 + -[9.99,10]*s1*s25 + -kUnbind2*s25 + -kBind3*s1*s25 + -kUnbind4*s25 + -kUnbind5*s25 + [0.08,0.1]*s29 + kUnbind3*s31
+  s26' = kBind3*s1*s16 + kBind4*s1*s15 + kBind5*s1*s14 + -[9.99,10]*s1*s26 + -[9.89,9.9]*s1*s26 + -kUnbind3*s26 + -kUnbind4*s26 + -kUnbind5*s26 + [0.08,0.1]*s30 + kUnbind2*s31
+  s27' = [9.99,10]*s1*s23 + [9.89,9.9]*s1*s20 + kBind3*s1*s18 + kBind4*s1*s17 + -[0.08,0.1]*s27 + -kUnbind2*s27 + -kUnbind3*s27 + -kUnbind4*s27 + -kBind5*s1*s27 + kUnbind5*s32
+  s28' = [9.99,10]*s1*s24 + [9.89,9.9]*s1*s21 + kBind3*s1*s19 + kBind5*s1*s17 + -[0.08,0.1]*s28 + -kUnbind2*s28 + -kUnbind3*s28 + -kBind4*s1*s28 + -kUnbind5*s28 + kUnbind4*s32
+  s29' = [9.99,10]*s1*s25 + [9.89,9.9]*s1*s22 + kBind4*s1*s19 + kBind5*s1*s18 + -[0.08,0.1]*s29 + -kUnbind2*s29 + -kBind3*s1*s29 + -kUnbind4*s29 + -kUnbind5*s29 + kUnbind3*s32
+  s30' = [9.99,10]*s1*s26 + kBind3*s1*s22 + kBind4*s1*s21 + kBind5*s1*s20 + -[0.08,0.1]*s30 + -[9.89,9.9]*s1*s30 + -kUnbind3*s30 + -kUnbind4*s30 + -kUnbind5*s30 + kUnbind2*s32
+  s31' = [9.89,9.9]*s1*s26 + kBind3*s1*s25 + kBind4*s1*s24 + kBind5*s1*s23 + -[9.99,10]*s1*s31 + -kUnbind2*s31 + -kUnbind3*s31 + -kUnbind4*s31 + -kUnbind5*s31 + [0.08,0.1]*s32
+  s32' = [9.99,10]*s1*s31 + [9.89,9.9]*s1*s30 + kBind3*s1*s29 + kBind4*s1*s28 + kBind5*s1*s27 + -[0.08,0.1]*s32 + -kUnbind2*s32 + -kUnbind3*s32 + -kUnbind4*s32 + -kUnbind5*s32
+  		
+ 	}
+
+	init
+	{
+		t in [0,0]
+  		s0 in [0.0437,0.0437] 
+		s1 in [0.0454,0.0454] 
+		s2 in [0.0107,0.0107] 
+		s3 in [0.0279,0.0279] 
+		s4 in [0.0254,0.0254] 
+  		s5 in [0.0369,0.0369]
+		s6 in [0.0405,0.0405]
+		s7 in [0.0431,0.0431]
+		s8 in [0.0157,0.0157]
+		s9 in [0.0388,0.0388]
+  		s10 in [0.0374,0.0374] 
+		s11 in [0.0093,0.0093] 
+		s12 in [0.0068,0.0068] 
+		s13 in [0.0284,0.0284] 
+		s14 in [0.0547,0.0547] 
+  		s15 in [0.0194,0.0194]
+		s16 in [0.0334,0.0334]
+		s17 in [0.0128,0.0128]
+		s18 in [0.0429,0.0429]
+		s19 in [0.0146,0.0146]
+  		s20 in [0.0289,0.0289] 
+		s21 in [0.0399,0.0399] 
+		s22 in [0.0508,0.0508] 
+		s23 in [0.0547,0.0547] 
+		s24 in [0.0254,0.0254] 
+  		s25 in [0.0312,0.0312]
+		s26 in [0.0079,0.0079]
+		s27 in [0.0085,0.0085]
+		s28 in [0.0480,0.0480]
+		s29 in [0.0145,0.0145]
+  		s30 in [0.0465,0.0465] 
+		s31 in [0.0139,0.0139] 
+		s32 in [0.0530,0.0530] 
+	}
+}
+
+

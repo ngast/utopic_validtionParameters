@@ -1,0 +1,45 @@
+continuous reachability
+{
+	state var t, s0, s1 , s2, s3, s4
+
+	par
+	{
+  		kUnbind2 = 0.1
+	}
+
+	setting
+	{
+		fixed steps 0.01                    # time step -size
+		time 0.2                            # time  horizon
+		remainder estimation 1e-3           # remainder  estimation
+		QR precondition                     # preconditioning  method
+		gnuplot octagon t, s1             # 2D projection  for  plotting
+		adaptive orders { min 4 , max 6 }
+		cutoff 1e-20                        # cutoff  threshold  is [-1e-20,1e-20]
+		precision 53
+		output replicatedBindingSite2Asymm  # name of the  output  files
+		print on                            # print  out the  computation  steps
+	}
+
+	nonpoly ode                           # integration  scheme
+	{
+		t' = 1
+		s0' = -[9.99,10]*s0*s1 + -[9.89,9.99]*s0*s1 + [0.08,0.1]*s2 + kUnbind2*s3
+  		s1' = -[9.99,10]*s0*s1 + -[9.89,9.99]*s0*s1 + -[9.99,10]*s1*s3 + [0.08,0.1]*s2 + -[9.89,9.99]*s1*s2 + kUnbind2*s3 + [0.08,0.1]*s4 + kUnbind2*s4
+  		s2' = [9.99,10]*s0*s1 + -[0.08,0.1]*s2 + -[9.89,9.99]*s1*s2 + kUnbind2*s4
+  		s3' = [9.89,9.99]*s0*s1 + -[9.89,9.99]*s1*s3 + -kUnbind2*s3 + [0.08,0.1]*s4
+  		s4' = [9.99,10]*s1*s3 + [9.89,9.99]*s1*s2 + -[0.08,0.1]*s4 + -kUnbind2*s4
+	}
+
+	init
+	{
+		t in [0,0]
+  		s0 in [0.0343,0.0343] 
+		s1 in [0.0979,0.0979] 
+		s2 in [0.1922,0.1922] 
+		s3 in [0.3365,0.3365] 
+  		s4 in [0.3391,0.3391] 
+	}
+}
+
+

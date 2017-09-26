@@ -1,0 +1,58 @@
+continuous reachability
+{
+	state var t, MM1 , MM2, MM3, MDM1, MDM2, MDM3, AOX, RADM, ATP
+
+	par
+ 	{
+	alpha = 0.01  beta = 0.05     gamma = 0.1
+  	kM = 0.003    kD = 0.003      k1 = 1000.0
+  	k2 = 100.0    k3 = 7000.0     kEM = 400.0
+  	kEP = 0.0008  kEC = 1000000.0 kR = 900.0
+  	kATP = 1200.0 ATPc = 1000.0   PAOx = 1.0
+	GDF = 5.0     RDF = 0.2       delt = 0.65
+	}
+	
+	setting
+	{
+		fixed steps 0.01                    # time step -size
+		time 1.0                            # time  horizon
+		remainder estimation 1e-1           # remainder  estimation
+		QR precondition                     # preconditioning  method
+		gnuplot octagon t , MM1               # 2D projection  for  plotting
+		adaptive orders { min 4 , max 6 }
+		cutoff 1e-20                        # cutoff  threshold  is [-1e-20,1e-20]
+		precision 53
+		output Aging                        # name of the  output  files
+		print on                            # print  out the  computation  steps
+	}
+
+	nonpoly ode                           # integration  scheme
+	{
+		t' = 1		
+  		MM1' =  (ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MM1+2*(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MM2/(GDF+1)-(alpha+(kM+kD)*RADM)*MM1
+  		MM2' = -[0.8,1.1]*(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MM2/(GDF+1)+2*(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MM3/GDF+kM*RADM*MM1-(beta+(kM+kD)*RADM)*MM1
+  		MM3' = -[2.1,2.3]*(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MM3/GDF+kM*RADM*MM2-(gamma+kD*RADM)*MM3
+  		MDM1' = (ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*(MDM1+MDM2)/GDF+kD*RADM*MM1-(alpha+kD*RADM)*MDM1
+  		MDM2' = -(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MDM2/GDF+2*(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MDM3/GDF+kD*RADM*MM2-(alpha+kM*RDF*RADM)*MDM1-(beta+kM*RDF*RADM)*MDM2
+  		MDM3' = -(ATP/(ATP+ATPc)*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))*1/(MM1+2*MM2/(GDF+1)+(MM3+MDM1+MDM2+MDM3)/GDF))*MDM3/GDF+kD*RADM*MM3+kM*RDF*RADM*MDM2-gamma*MDM3
+  		AOX' = ATP/(ATP+ATPc)*k2/(1+(PAOx/(RADM*(MM1+MM2+MM3)+RDF*RADM*(MDM1+MDM2+MDM3))))-delt*AOX
+  		RADM' = [5,5.3]*k3*AOX*RADM/(MM1+MM2+MM3+MDM1+MDM2+MDM3)
+  		ATP'  = kATP*MM1+0.5*kATP*MM2-ATP/(ATP+ATPc)*(kEM*k1/((1+ATP/ATPc)*(1+ATP/ATPc)*(1+ATP/ATPc))+kEC+kEP*k2/(1+(PAOx/(RADM*(MM1+MM2+MM3)+RDF*RADM*(MDM1+MDM2+MDM3)))))
+	}
+
+	init
+	{
+		t in [0,0]
+  		MM1 in [500,500]  
+		MM2 in [500,500]  
+		MM3 in [500,500]
+		MDM1 in [100,100]
+		MDM2 in [100,100] 
+		MDM3 in [100,100] 
+		AOX in [200,200] 
+		RADM in [500,500]
+  		ATP in [20,20]
+	}
+}
+
+

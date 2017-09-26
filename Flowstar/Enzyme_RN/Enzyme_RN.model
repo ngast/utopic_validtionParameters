@@ -1,0 +1,51 @@
+continuous reachability
+{
+	state var t, cE, cS1, cS2, cES1, cES2, cES1ES2, cP
+
+	par
+	{
+		k4=1 k5=1 k6 = 1
+  		k7 = 1 k8 = 1 k9 = 1
+  		Fs1 = 2 Fs2 = 2 epsS1 = 0.1 epsS2 = 0.1 epsP = 0.1
+	}
+
+	setting
+	{
+		fixed steps 0.01                    # time step -size
+		time 1.0                            # time  horizon
+		remainder estimation 1e-1           # remainder  estimation
+		QR precondition                     # preconditioning  method
+		gnuplot octagon t , cE              # 2D projection  for  plotting
+		adaptive orders { min 4 , max 6 }
+		cutoff 1e-20                      # cutoff  threshold  is [-1e-20,1e-20]
+		precision 53
+		output Enzyme_RN               # name of the  output  files
+		print on                       # print  out the  computation  steps
+	}
+
+	nonpoly ode                           # integration  scheme
+	{
+		t' = 1		
+		cE' = -[0.9,1.1]*cE*cES1-[1,1.4]*cE*cES2+k9*cES1ES2
+  		cS1' = -[0.9,1.1]*cE*cS1+[0.8,1]*cES2+k8*cES1ES2+Fs1-epsS1*cS1
+  		cS2' = -[1,1.4]*cE*cES2-k5*cS2*cES1+k6*cES1ES2+Fs2-epsS2*cS2
+  		cES1' = [0.9,1.1]*cE*cS1-[0.8,1]*cES1-k5*cES1+k6*cES1ES2
+  		cES2' = [1,1.4]*cE*cS2-k4*cES2-k7*cES2*cS1+k8*cES1ES2
+  		cES1ES2' = k5*cS2*cES1+k7*cES2*cS1+(k6+k8+k9)*cES1ES2
+  		cP' = k9*cES1ES2-epsP*cP 
+	}
+
+	init
+	{
+		t in [0,0]
+		cE in [0.1,0.1]
+		cS1 in [0.1,0.1]
+		cS2 in [0.1,0.1]
+		cES1 in [0.2,0.2]
+		cES2 in [0.1,0.1]
+		cES1ES2 in [0.3,0.3]
+		cP in [0.1,0.1]
+	}
+}
+
+

@@ -1,0 +1,36 @@
+continuous reachability
+{
+	state var t, x , y
+
+
+
+	setting
+	{
+		fixed steps 0.01                    # time step -size
+		time 1.0                            # time  horizon
+		remainder estimation 1e-1           # remainder  estimation
+		QR precondition                     # preconditioning  method
+		gnuplot octagon t , x               # 2D projection  for  plotting
+		adaptive orders { min 4 , max 6 }
+		cutoff 1e-20                      # cutoff  threshold  is [-1e-20,1e-20]
+		precision 53
+		output vanderPol                         # name of the  output  files
+		print on                            # print  out the  computation  steps
+	}
+
+	nonpoly ode                           # integration  scheme
+	{
+		t' = 1		
+		x' = y*[0.5,1]
+    		y' = -y + -[1,1.2]*x + -[0.8,1.2]*x*x*y
+	}
+
+	init
+	{
+		t in [0,0]
+		x in [1,1]
+		y in [1.2,1.2]
+	}
+}
+
+

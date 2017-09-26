@@ -1,0 +1,57 @@
+continuous reachability
+{
+	state var t, Da, Dr, Da1, Dr1, Ma, A, Mr, R, C
+
+	par
+	{
+		thetaR = 1
+  	        gammaR = 2 gammaC = 2
+  		alphaA = 0.2 alphaA1 = 0.5 alphaR = 0.2 alphaR1 = 0.5 
+  		deltaMa = 0.1 deltaMr = 0.1 deltaA = 0.1 deltaR = 0.1
+  		betaR = 0.7
+	}
+
+	setting
+	{
+		fixed steps 0.01                    # time step -size
+		time 1.0                            # time  horizon
+		remainder estimation 1e-1           # remainder  estimation
+		QR precondition                     # preconditioning  method
+		gnuplot octagon t , Da              # 2D projection  for  plotting
+		adaptive orders { min 4 , max 6 }
+		cutoff 1e-20                      # cutoff  threshold  is [-1e-20,1e-20]
+		precision 53
+		output GeneticOscilator               # name of the  output  files
+		print on                       # print  out the  computation  steps
+	}
+
+	nonpoly ode                           # integration  scheme
+	{
+		t' = 1		
+		Da' = [0.9,1.1]*Da1-[1.8,2.1]*Da*A
+  		Dr' = thetaR*Dr1-gammaR*Dr*A
+  		Da1' = [1.8,2.1]*Da*A-[0.9,1.1]*Da1
+  		Dr1' = gammaR*Dr*A-thetaR*Dr1
+  		Ma' = alphaA1*Da1+alphaA*Da-deltaMa*Ma
+  		A' = [0.5,1]*Ma+[0.9,1.1]*Da1+thetaR*Dr1-A*([1.8,2.1]*Da+gammaR*Dr+gammaC*R+deltaA)
+  		Mr' = alphaR1*Dr1+alphaR*Dr-deltaMr*Mr
+  		R' = betaR*Dr1 - gammaC*A*R + deltaA*C-deltaR*R
+  		C' = gammaC*A*R-[1.8,2.1]*C
+	}
+
+	init
+	{
+		t in [0,0]
+		Da in [0.1,0.1]
+   		Dr in [0.1,0.1]
+  		Da1 in [0.1,0.1]
+   		Dr1 in [0.2,0.2]
+   		Ma in [0.1,0.1]
+   		A in [0.1,0.1]
+   		Mr in [0.1,0.1]
+   		R in [0.1,0.1]
+   		C in [0.1,0.1]
+	}
+}
+
+
