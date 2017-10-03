@@ -1,5 +1,5 @@
 
-function Aging_erach_set()
+function Aging_erach_set(CORA_path)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Reachability analysis for systems with uncertain parameters using CORA
@@ -8,7 +8,6 @@ function Aging_erach_set()
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- CORA_path='../../CORA_2016/';
  addpath(genpath(CORA_path));
 
  x0_= [500 500 500 100 100 100 200 500 20]';

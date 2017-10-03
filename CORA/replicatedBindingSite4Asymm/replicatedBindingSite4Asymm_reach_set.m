@@ -1,5 +1,5 @@
 
-function replicatedBindingSite4Asymm_reach_set()
+function replicatedBindingSite4Asymm_reach_set(CORA_path)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Reachability analysis for systems with uncertain parameters using CORA
@@ -8,7 +8,6 @@ function replicatedBindingSite4Asymm_reach_set()
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- CORA_path='../../CORA_2016/';
  addpath(genpath(CORA_path));
 
  x0_= [ 0.1008 0.0988 0.0522 0.0872 0.0228 0.0939 0.0042 0.0368 0.0061 0.0129 0.1095 0.0924 0.0422 0.1264 0.0046 0.0584 0.0508 ]'; 

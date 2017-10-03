@@ -1,5 +1,5 @@
 
-function vanderPol_1uncertain()
+function vanderPol_reach_set(CORA_path)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Reachability analysis for systems with uncertain parameters using CORA
@@ -8,7 +8,6 @@ function vanderPol_1uncertain()
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- CORA_path='../../CORA_2016/';
  addpath(genpath(CORA_path));
 
  x0_= [1 1.2]';

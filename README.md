@@ -3,48 +3,62 @@
 This repository contains all configuration files to generate Table I
 of the paper "Under-Approximation Through Optimal Control".
 
-# UTOPIC
+# ALGO-vnode
 
 ## Required Software
 
 * Matlab 2016 or higher
-* VNODE-LP : http://www.cas.mcmaster.ca/~nedialk/vnodelp/
 
-## Running the examples: Van der Pol
+## Installation
 
-The configurations files are in the folder utopic/VanderPol/
+* Download VNODE-LP : http://www.cas.mcmaster.ca/~nedialk/vnodelp/
 
-* execute vanderPol_Pontryagin.m in Matlab
-* compile vanderPol_VNODELP.cc and execute the binary
+## Running the examples
 
-To run another model, replace vanderPol by the name of the desired model.
+First, we compile the vnode file of each example (putting the binary in the same folder as the source file and keeping the same name). Then, in the run_all.m file of the ALGO-vnode folder, we set the correct path to Matlab. 
+
+We execute the following commands in a terminal:
+
+* cd ALGO-vnode
+* ./run_all.sh
+
+In each example, the obtained under-approximation of the reachable set can be seen in the terminal.
 
 # CORA
 
 ## Required Software
 
 * Matlab 2016 or higher
-* CORA 2016: http://www.i6.in.tum.de/Main/SoftwareCORA
 
-## Running the examples: Van der Pol 
+## Installation
 
-The configuration file is in the folder CORA/VanderPol/
+* Download CORA 2016: http://www.i6.in.tum.de/Main/SoftwareCORA
 
-* set the correct path to CORA in the first line of vanderPol_reach_set.m file
-* execute vanderPol_reach_set.m in Matlab
+## Running the examples:
 
-To run another model, replace vanderPol by the name of the desired model.
+First, in the run_all.m file of the CORA folder, we set the correct path to CORA. Then, we execute the following commands in a terminal (note that, in the first command, we must put the correct path to Matlab binaries):
+
+* PATH=$PATH:/usr/local/MATLAB/R2016b/bin 
+* cd CORA 
+* matlab -nodesktop -r run_all
+
+In each example, the obtained over-approximation of the reachable set can be seen in the terminal. The examples with timeout have been commented out.
 
 # FLOW*
 
-## Required Software 
+## Installation
 
-* Flow* 2.0.0 or higher
+* Download Flow* 2.0.0 or higher
 
-## Running the example: Van der Pol
+## Configuration
 
-The configuration files are in the folder Flowstar/VanderPol/
+* In the run_all.sh file in the Flowstar folder, set the correct path to flowstar
 
-* set the correct path to flowstar in run.sh file
-* execute run.sh
+## Running the examples
 
+First, in the run_all.m file of the CORA folder, we set the correct path to flowstar. Then, we execute the following commands in a terminal:
+
+* cd Flowstar 
+* ./run_all.sh
+
+In each example, an image with the obtained over-approximation of the reachable set can be seen in the images folder and the output of the program in the outputs folder.
